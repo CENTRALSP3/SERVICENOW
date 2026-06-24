@@ -74,15 +74,15 @@
       display: block;
     }
 
-    /* ===== QR POPUP ===== */
+    /* ===== QR POPUP - Desktop ===== */
     #qr-popup {
       position: absolute;
       left: 40px;
-      top: 50%;
+      top: 62%;                    /* 20% mais abaixo */
       transform: translateY(-50%);
       z-index: 20;
       display: block;
-      width: clamp(160px, 11vw, 220px);
+      width: clamp(185px, 12.8vw, 253px);   /* 15% maior */
       height: auto;
       opacity: 1;
       pointer-events: auto;
@@ -98,21 +98,6 @@
     }
     #qr-popup:hover {
       transform: translateY(-50%) scale(1.04);
-    }
-
-    #device-badge {
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 10;
-      background: rgba(17, 24, 39, 0.88);
-      color: #fff;
-      font-size: 12px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      letter-spacing: 0.3px;
-      user-select: none;
-      backdrop-filter: blur(4px);
     }
 
     /* Mobile */
@@ -148,7 +133,7 @@
         <div id="video-placeholder">Carregando vídeo…</div>
       </div>
 
-      <!-- QR CODE POPUP (agora dentro do stage no desktop) -->
+      <!-- QR CODE POPUP -->
       <a id="qr-popup" 
          href="https://academiadamodacea.com.br/app/cursopresencial/matricula/a8c85dda-fa08-40c8-a35c-e5f49c6f3195" 
          target="_blank" 
@@ -156,13 +141,11 @@
         <img src="QR CODE POPUP.png" alt="QR Code - Matrícula" />
       </a>
     </div>
-
-    <div id="device-badge">Ajustando layout…</div>
   </div>
 
   <script>
     const BACKGROUND_DESKTOP = "bg-desktop.png";
-    const BACKGROUND_MOBILE = "BG CELULAR.jpg";
+    const BACKGROUND_MOBILE = "BG CELULAR.jpeg";
     const VIDEO_URL = "service-now.mp4";
 
     const LAYOUTS = {
@@ -183,7 +166,6 @@
     const videoFrame = document.getElementById("video-frame");
     const bgPlaceholder = document.getElementById("bg-placeholder");
     const videoPlaceholder = document.getElementById("video-placeholder");
-    const deviceBadge = document.getElementById("device-badge");
 
     function detectMode() {
       const isSmall = window.innerWidth <= 768;
@@ -237,10 +219,6 @@
       videoContainer.style.top = `${top}%`;
       videoContainer.style.width = `${widthPct}%`;
       videoContainer.style.height = `${heightPct}%`;
-
-      deviceBadge.textContent = mode === "mobile" 
-        ? "Modo mobile • 1080 × 1920" 
-        : "Modo desktop • 1920 × 1080";
     }
 
     function init() {
