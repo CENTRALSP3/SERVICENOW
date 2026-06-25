@@ -87,11 +87,13 @@
     /* --- QR CODE --- */
     .qr-container {
       width: 100%;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 8px 24px;
+      min-height: 320px;
     }
     .qr-container img {
       width: 200px;
@@ -129,6 +131,7 @@
       padding: 12px 40px 20px;
       display: flex;
       justify-content: center;
+      margin-top: -10%;
     }
     .download-btn {
       width: 200px;
@@ -212,19 +215,22 @@
 
       .logo-container { padding: 5px; }
       .logo-container img { width: 180px; }
+      .qr-container { min-height: 200px; }
       .qr-container img { width: 160px; height: 160px; }
       .download-btn { width: 160px; height: 56px; font-size: 12px; }
-      .download-area { padding: 8px 20px 16px; }
+      .download-area { padding: 8px 20px 16px; margin-top: -6%; }
       .video-container { padding: 16px 24px; }
     }
 
     /* =========================================================
        MOBILE (<=768px) — vertical layout
+       Ordem: LOGO → TÍTULO → VÍDEO → QR + DOWNLOAD (lado a lado)
        ========================================================= */
     @media (max-width: 768px) {
       html, body { background: #f2eded; }
       body { align-items: flex-start; }
 
+      /* Esconder estrutura desktop grid */
       .canvas {
         display: flex;
         flex-direction: column;
@@ -242,6 +248,7 @@
         height: 100%;
       }
 
+      /* Sidebar vira wrapper flex vertical */
       .sidebar {
         border-right: none;
         background: transparent;
@@ -251,6 +258,7 @@
         width: 100%;
       }
 
+      /* 1. LOGO — centralizada */
       .logo-container {
         height: auto;
         width: 100%;
@@ -264,10 +272,12 @@
         max-height: 160px;
       }
 
+      /* Esconder QR da sidebar no mobile — aparece só no bottom-actions */
       .sidebar > .qr-container {
         display: none;
       }
 
+      /* 3. VÍDEO — destaque principal */
       .content {
         display: flex;
         flex-direction: column;
@@ -292,8 +302,9 @@
         object-fit: contain;
       }
 
+      /* 4. BOTTOM ACTIONS — QR + download lado a lado, 25% abaixo */
       .download-area {
-        display: none;
+        display: none; /* esconder botão da sidebar no mobile */
       }
       .bottom-actions {
         display: flex;
@@ -326,6 +337,7 @@
       }
     }
 
+    /* Bottom-actions hidden on desktop, shown on mobile */
     .bottom-actions { display: none; }
 
     @media (max-width: 768px) {
@@ -353,7 +365,7 @@
         <img src="LOGO.png" alt="ServiceNow">
       </div>
 
-      <!-- 2. QR CODE -->
+      <!-- 2. QR CODE (desktop: na sidebar; mobile: vai pra bottom-actions) -->
       <div class="qr-container">
         <a href="https://academiadamodacea.com.br/app/cursopresencial/matricula/a8c85dda-fa08-40c8-a35c-e5f49c6f3195" target="_blank" rel="noopener noreferrer">
           <img src="qrcode.png" alt="QR Code">
@@ -364,7 +376,7 @@
         <div class="qr-alert">Obrigatório</div>
       </div>
 
-      <!-- 3. DOWNLOAD -->
+      <!-- 4. DOWNLOAD (desktop: na sidebar) -->
       <div class="download-area">
         <a class="download-btn"
            href="https://ceabr-my.sharepoint.com/:b:/g/personal/lucas_banza_cea_com_br/IQBkypRdn-YJQa2VD_Xw97rlAUjbVLVNs3R-Ro2CL5kXbMo?e=Zd6FeZ"
@@ -378,6 +390,7 @@
 
     <!-- ===== MAIN CONTENT ===== -->
     <main class="content">
+      <!-- VÍDEO (desktop: ocupa toda content; mobile: logo abaixo do título) -->
       <section class="video-container">
         <div class="video-wrapper">
           <video controls autoplay playsinline loop>
@@ -388,7 +401,7 @@
       </section>
     </main>
 
-    <!-- ===== BOTTOM ACTIONS (mobile ONLY) ===== -->
+    <!-- ===== BOTTOM ACTIONS (mobile ONLY: QR + download lado a lado) ===== -->
     <div class="bottom-actions">
       <div class="qr-container">
         <a href="https://academiadamodacea.com.br/app/cursopresencial/matricula/a8c85dda-fa08-40c8-a35c-e5f49c6f3195" target="_blank" rel="noopener noreferrer">
